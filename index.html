@@ -98,7 +98,8 @@
                 CodePlayer
                 
             </div>
-            
+    
+<!--Toggle html, css, JS, output views-->            
             <div id="buttonContainer">
                 <div class= "toggleButton active" id="html">HTML</div>
                 
@@ -111,30 +112,34 @@
             </div>
         
         </div>
-        
+
+<!--input panels-->        
         <div id="bodyContainer">
-        
+       
             <textarea id="htmlPanel" class="panel">Hello World!</textarea>
             <textarea id="cssPanel" class="panel hidden">p{text-color: green;}</textarea>
             <textarea id="javascriptPanel" class="panel hidden"></textarea>
             <iframe id="outputPanel" class="panel"></iframe>
+            
         </div>
         
         
         <script type="text/javascript">
-            
+ 
+/*Update output*/            
             function UpdateOutput(){
                 $("iframe").contents().find("html").html("<html><head><style type='text/css'>" + $("#cssPanel").val() + "</style></head><body>" + $("#htmlPanel").val() + "</body></html>");
 
                 document.getElementById("outputPanel").contentWindow.eval($("#javascriptPanel").val());
             }
-
+/*Toggle panel highlighted button view on hover*/
             $(".toggleButton").hover(function(){
                 $(this).addClass("highlightedButton");
             }, function(){
                 $(this).removeClass("highlightedButton");
             });
-
+            
+/*View or hide panel on click*/
             $(".toggleButton").click(function(){
                 $(this).toggleClass("active");
                 $(this).removeClass("highlightedButton");
@@ -152,7 +157,8 @@
             $(".panel").width(($(window).width() / 2) - 10);
 
             UpdateOutput();
-
+            
+/* update panel as user inputs*/
             $("textarea").on("change keyup paste", function(){
                 UpdateOutput();
             });
